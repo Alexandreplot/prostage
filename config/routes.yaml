@@ -13,3 +13,11 @@ formations:
 stages:
     path: /stages/{id}
     controller: App\Controller\ProStagesController::stages
+
+Stage_formations:
+    path: /Stage_formations/{id}
+    controller: App\Controller\ProStagesController::Stage_formations
+
+Stage_entreprises:
+    path: /Stage_entreprises/{id}
+    controller: App\Controller\ProStagesController::Stage_entreprises

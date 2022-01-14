@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    
 
-<h1> {{leStage.titre}} </h1>
-<h2> Entreprise : {{leStage.entreprise.nom}} </h2>
-<p> Description du poste : {{leStage.string}} </p>
+<h1> {{leStage.titre}} </h1> </br>
+<h2> Entreprise : {{leStage.entreprise.nom}} </h2> </br>
+<p> Description du poste : {{leStage.string}} </p> </br>
 <a href={{leStage.entreprise.siteWeb}}>site web de l'entreprise</a>
 {% endblock %}
