@@ -13,66 +13,60 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $faker = \Faker\Factory::create('fr_FR');
-        
-        //FORMATIONS
-        $dutInfo = new Formation();
-        $dutInfo->setNomCourt("DUT Informatique");
-        $dutInfo->setNomLong("Diplome Universitaire de Technologie en informatique");
 
-        $lpProgAv = new Formation();
-        $lpProgAv->setNomCourt("LP Prog-Av");
-        $lpProgAv->setNomLong("Licence professionnelle programmation avancée");
+            //FORMATIONS
+        $info = new Formation();
+        $info->setNomCourt("DUT Info");
+        $info->setNomLong("Diplome Universitaire Technologique Informatique");
 
-        $lpNum = new Formation();
-        $lpNum->setNomCourt("LP Num");
-        $lpNum->setNomLong("Licence professionnelle des métiers du numérique");
+        $gim = new Formation();
+        $gim->setNomCourt("DUT GIM");
+        $gim->setNomLong("Diplome Universitaire Génie industrie méchanique");
 
-        $dutGIM = new Formation();
-        $dutGIM->setNomCourt("DUT GIM");
-        $dutGIM->setNomLong("Diplome Universitaire de Technologie génie industriel et méchanique");
+        $lpPa = new Formation();
+        $lpPa->setNomCourt("LP PA");
+        $lpPa->setNomLong("Licence Professionnelle programation avancé");
 
-        $tabFormations = array($dutGIM, $dutInfo, $lpNum, $lpProgAv);
-        
-        foreach ($tabFormations as $formation){
+        $tabFormations = array($info,$gim,$lpPa);
+        foreach ($tabFormations as $formation) {
             $manager->persist($formation);
         }
 
-        //-----ENTREPRISES-----
-        $nbEntreprises = 10;
-    
-        for ($i=1; $i <= $nbEntreprises; $i++){
+            //ENTREPRISES
+        $tabEntreprises = array();
+        for ($i=0; $i < 10; $i++) {
             $entreprise = new Entreprise();
-            $entreprise->setNom($faker->company());
-            $entreprise->setActivite($faker->jobTitle());
-            $entreprise->setAdresse($faker->address());
-            $entreprise->setUrlSite($faker->domainName());
+            $entreprise->setNom($faker->realText($maxNbChars = 20, $indexSize = 2))
+                        ->setActivite($faker->realText($maxNbChars = 100, $indexSize = 2))
+                        ->setAdresse($faker->address)
+                        ->setSiteWeb($faker->realText($maxNbChars = 100, $indexSize = 2))
+            ;
 
+            array_push($tabEntreprises, $entreprise);
             $manager->persist($entreprise);
-
-            $tabEntreprises[]=$entreprise;
-
         }
-
-        //-----STAGES-----
-        $nbStages = 30;
-
-        for ($numStage=1; $numStage <= $nbStages; $numStage++){
+        
+            //STAGE
+        for ($i=0; $i < 20; $i++) {
             $stage = new Stage();
-            $stage->setTitre($faker->jobTitle());
-            $stage->setDescMission($faker->realText($maxNbChars = 300, $indexSize = 2));
-            $stage->setEmailContact($faker->companyEmail());
-            
-            $entrepriseConcernee = $faker->numberBetween($min = 0, $max = count($tabEntreprises)-1);
-            $tabEntreprises[$entrepriseConcernee] -> addStage($stage);
-            $manager->persist($stage);
+            $stage->setTitre($faker->realText($maxNbChars = 30, $indexSize = 2))
+                    ->setString($faker->realText($maxNbChars = 500, $indexSize = 2))
+                    ->setCourielContact($faker->realText($maxNbChars = 20, $indexSize = 2))
+            ;
 
-            $nbFormationsConcernees = $faker->numberBetween($min = 0, $max = count($tabFormations)-1);
-            for($i=0; $i <= $nbFormationsConcernees; $i++){
-                $formationConcernee = $faker->numberBetween($min = 0, $max = count($tabFormations)-1);
-                $tabFormations[$formationConcernee] -> addStage($stage);
+            $entrep= $faker->randomElement($array = $tabEntreprises);
+            $stage->setEntreprise($entrep);
+            $entrep->addStage($stage);
+            $manager->persist($entrep);
+            $nbFormation = $faker->numberBetween($min = 1, $max = 3);
+
+            for ($j=0; $j < $nbFormation; $j++) { 
+                $stage->addFromation($tabFormations[$j]);
+                $tabFormations[$j]->addStage($stage);
+                $manager->persist($tabFormations[$j]);
             }
-            
-            $manager->persist($stage);
+
+            $manager->persist($stage);   
         }
 
         $manager->flush();
