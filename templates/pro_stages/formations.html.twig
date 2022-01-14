@@ -1,11 +1,21 @@
 {% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Bienvenue sur ProStage </h1>
+    </br>
+    <h3>
+        Voici formations : :
+    </h3>
 
-{% block contenuPage %}
-    {% for formationCourante in listeformations %}
-        <h3>{{formationCourante.nomLong}}
-        <a href="{{path('stages',{id:formationCourante.id})}}">Voir les stages pour cette formation</a></h3>
-        <br>
+
+    {% for formationCourante in listeFormations %}
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title"> {{formationCourante.nomLong}} </h3>
+                    </br>
+                    <div align="right">
+                        <a href="{{path('stages',{id:formationCourante.id})}}">Voir les stages pour cette formation</a>
+                    </div>
+                </div>
+            </div>
     {% endfor %}
 {% endblock %}
-
-{% block footerPage %}{% endblock %}

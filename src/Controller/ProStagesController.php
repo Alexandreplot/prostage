@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Stage;
 use App\Entity\Entreprise;
+use App\Entity\Formation;
 
 class ProStagesController extends AbstractController
 {
@@ -36,7 +37,7 @@ class ProStagesController extends AbstractController
     {
         $repositoryFormation = $this->getDoctrine()->getRepository(Formation::class);//recup repository des formations
 
-        $listeFormation = $repositoryFormation->findAll();
+        $listeFormations = $repositoryFormation->findAll();
 
         return $this->render('pro_stages/formations.html.twig', ['listeFormations'=>$listeFormations]);
     }
@@ -46,8 +47,8 @@ class ProStagesController extends AbstractController
     {
         $repositoryStage = $this->getDoctrine()->getRepository(Stage::class);//recup repository des stage ainsi que uniquement les stages concernés
 
-        $listeStage = $repositoryStage->find($id);
+        $stage = $repositoryStage->find($id);
 
-        return $this->render('pro_stages/stages.html.twig', ['listeStage'=>$listeStage]);
+        return $this->render('pro_stages/stages.html.twig', ['leStage'=>$stage]);
     }
 }
