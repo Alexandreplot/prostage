@@ -1,1 +1,11 @@
-formations
+{% extends 'base.html.twig' %}
+
+{% block contenuPage %}
+    {% for formationCourante in listeformations %}
+        <h3>{{formationCourante.nomLong}}
+        <a href="{{path('stages',{id:formationCourante.id})}}">Voir les stages pour cette formation</a></h3>
+        <br>
+    {% endfor %}
+{% endblock %}
+
+{% block footerPage %}{% endblock %}

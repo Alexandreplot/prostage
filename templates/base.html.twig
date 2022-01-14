@@ -1,42 +1,92 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
+        <head>
+            <meta
+            charset="UTF-8">
 
-            <!-- MDB -->
-            <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-            rel="stylesheet"
-            />
-            <!-- Google Fonts -->
-            <link
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-            rel="stylesheet"
-            />
-            <!-- MDB -->
-            <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css"
-            rel="stylesheet"
-            />
+            {# Block responsivité #}
+            <meta
+            content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 
-        {% endblock %}
+            {# CSS Minimal de Bootstrap #}
+            <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" rel="stylesheet">
 
-        {% block javascripts %}
-            
-            <!-- MDB -->
-            <script
-            type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js"
-            ></script>
+            {#CSS Fontello #}
+            <link rel="stylesheet" href="{{asset('/css/fontello.css')}}">
 
-        {% endblock %}
+            <title>
+                {% block title %}
+                ProStage
+                {% endblock %}
+            </title>
 
-    </head>
-    <body>
-        {% block body %}{% endblock %}
+            {% block stylesheets %}{% endblock %}
+
+
+        </head>
+        <body>
+             {% block menu %}
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 bg-dark text-white">
+                            <h2>
+                                <center>
+                                    ProStage
+                                </center>
+                            </h2>
+
+
+                            <nav class="navbar navbar-expand-lg navbar-light bg-dark text-white">
+
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                    
+                                    <ul class="navbar-nav bg-dark text-white">
+                                        <li class="nav-item">
+
+                                            <a class="nav-link text-white" href="/">Accueil</a>
+
+                                        </li>
+                                        <li class="nav-item">
+
+                                            <a class="nav-link text-white" href="/entreprises">Entreprises</a>
+                                        </li>
+                                        <li class="nav-item">
+
+                                            <a class="nav-link text-white" href="/formations">Formations</a>
+                                        </li>
+                                    </ul>
+                                    
+                                </li>
+                            </div>
+                        </li>
+                    </nav>
+                </div>
+            </body>
+        </html>
+    </div>
+    {% endblock %}
+    {% block body %}
+    <h1>-----BODY-----</h1>
+    {% endblock %}
+
+    {% block footer %}
+    <div class="row" style="margin-top:15px:">
+        <div class="col-md-12">
+            <p  projet réalisé par Alexandre PIAU (TD2, TP4) </p>
+        </div>
+    </div>
+    </div>
+    {% endblock %}
+
+
+    {# Blocks javascript de Bootstrap #}
+
+    {% block javascripts %}
+    <script crossorigin="anonymous" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    {% endblock %}
+
+    </body>
     </body>
 </html>

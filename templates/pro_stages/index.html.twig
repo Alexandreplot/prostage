@@ -1,24 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProStagesController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Bienvenue sur ProStage </h1>
+    </br>
+    <h3>
+        Voici Stages proposés :
+    </h3>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Temp/symfony/prostage/src/Controller/ProStagesController.php'|file_link(0) }}">src/Controller/ProStagesController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Temp/symfony/prostage/templates/pro_stages/index.html.twig'|file_link(0) }}">templates/pro_stages/index.html.twig</a></code></li>
-    </ul>
-</div>
-
-<h1> yoo le rap </h1>
-
-<p> bien ou quoi tristan </p>
+    {% for stageCourant in listeStages %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"> {{stageCourant.titre}} </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{stageCourant.entreprise.nom}} </h6>
+                    </br>
+                    <p class="card-text">{{stageCourant.string}}</p></i>
+                    <div align="right">
+                        <a href="{{ path('stages',{id:stageCourant.id}) }}" class="card-link">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
 {% endblock %}

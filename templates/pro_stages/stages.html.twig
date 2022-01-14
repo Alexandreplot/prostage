@@ -1,1 +1,43 @@
-stages
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>ProStage</h1>
+    </br>
+    <h3>
+        Stages proposés :
+    </h3>
+    
+    {% for stageCourant in listeStages %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"> {{stageCourant.titre}} </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{stageCourant.entreprise.nom}} </h6>
+                    </br>
+                    <p class="card-text">{{stageCourant.string}}</p></i>
+                    <div align="right">
+                        <a href="{{ path('stages',{id:stageCourant.id}) }}" class="card-link">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+
+<h1> {{elStage.titre}} </h1>
+<h2> {{elStage.entreprise.nom}} </h2>
+<p> {{elStage.description}} </p>
+<h3> {{elStage.formations.titre}} </h3>
+<p> site web entreprise <p>
+{% endblock %}

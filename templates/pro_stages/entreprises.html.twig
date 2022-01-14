@@ -1,1 +1,24 @@
-entreprises
+{% extends 'base.html.twig' %}
+
+{% block body %}
+</br>
+    {% for EntrepriseCourante in listeEntreprises %}
+        <div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"> {{EntrepriseCourante.nom}} </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{EntrepriseCourante.activite}} </h6>
+                    </br>
+                    <p class="card-text">{{EntrepriseCourante.adresse}} </br> </p></i>
+                    <div align="right">
+                    
+                        <a href="{{ path('stages',{id:5}) }}" class="card-link">Voir plus</a>
+                    </div>
+                </div>
+            </div>
+            </br>
+        </div>
+
+    {% endfor %}
+
+{% endblock %}
